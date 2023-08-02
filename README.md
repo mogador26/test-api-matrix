@@ -1,7 +1,5 @@
 # Test des API Matrix avec Tchap
 
----
-
 ## Le principe    
 
 Le logiciel de messagerie instantané Tchap est basé sur [Matrix](https://spec.matrix.org/latest/).
@@ -11,8 +9,6 @@ Dans le cas présent, nous utilisons l'appel à l'API Matrix via un shell unix. 
 
 Matrix recense différents [SDK](https://matrix.org/ecosystem/sdks/) incluant notamment les langages python et JS.
 
----
-
 ## Pré-requis
 
 Vu sur le salon tchap [bot](https://tchap.gouv.fr/#/room/#BotsetIntgrationsTchapU2tHdMEN80D:agent.dinum.tchap.gouv.fr)
@@ -21,7 +17,6 @@ Vu sur le salon tchap [bot](https://tchap.gouv.fr/#/room/#BotsetIntgrationsTchap
 - choisir une adresse email précisant qu'il s'agit d'un bot (ex: cloudpinative.dso-bot@interieur.gouv.fr);
     - cette action n'est pas encore réalisée dans la mesure où nous sommes en phase de test sur un salon privé **test-tbt**
 - définir un salon (ou ROOM) Tchap. Ici **test-tbt** dont l'identification est précisée dans les paramètres du salon.
-
 
 ## Actions
 
@@ -65,7 +60,7 @@ echo ${TOKEN} > token.txt
 
 ```
 
-> :warning:la conservation du token est nécessaire afin de ne pas générer de session *fantôme*. sous Tchap. 
+> :warning: la conservation du token est nécessaire afin de ne pas générer de session *fantôme*. sous Tchap. 
 
 ### envoi d'un message
 
@@ -85,8 +80,6 @@ fi
 ```
 > :warning: l'usage de l'attribut *formatted_body* avec la variable ${MESSAGE} encapsulée (balises html) n'a pas permis d'avoir une représentation html du message. (test : en cours).
 
-
----
 
 ### résultats
 
