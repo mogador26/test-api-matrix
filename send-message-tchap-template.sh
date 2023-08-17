@@ -14,8 +14,8 @@ else
     MESSAGE="veuillez saisir un message ..."
 fi
 
-
-MESSAGE_HTML="<h1>${MESSAGE}</h1>"
+MESSAGE_PLAIN="${MESSAGE}"
+MESSAGE_FORMATTED="&#9888;&#65039;<strong>${MESSAGE}<strong>"
 
 ### fonction de demande de token session 
 function getTokenSession() {
@@ -33,12 +33,12 @@ func_result=${TOKEN}
 ### fonction d'envoi de message
 function sendMessage() {
 
-local MESSAGE=$1
-local MESSAGE_HTML=$2
+local MESSAGE_PLAIN=$1
+local MESSAGE_FORMATTED=$2
 local ROOM=$3
 local TOKEN=$4
 
-curl -sk -X POST -H "Content-Type: application/json" -d "{\"msgtype\":\"m.text\", \"body\":\"${MESSAGE}\",\"formatted_body\":\"${MESSAGE_HTML}\"}" "https://matrix.agent.interieur.tchap.gouv.fr/_matrix/client/r0/rooms/${ROOM}/send/m.room.message?access_token=${TOKEN}"
+curl -sk -X POST -H "Content-Type: application/json" -d "{\"msgtype\":\"m.text\", \"body\":\"${MESSAGE_PLAIN}\",\"format\":\"org.matrix.custom.html\",\"formatted_body\":\"${MESSAGE_FORMATTED}\"}" "https://matrix.agent.interieur.tchap.gouv.fr/_matrix/client/r0/rooms/${ROOM}/send/m.room.message?access_token=${TOKEN}"
 
 }
 
@@ -65,7 +65,7 @@ echo ${TOKEN} > token.txt
 if [ ! -z "${TOKEN}" ] 
 then
 echo "envoi de message"
-sendMessage "${MESSAGE}" "${MESSAGE_HTML}" ${ROOM} ${TOKEN}
+sendMessage "${MESSAGE_PLAIN}" "${MESSAGE_FORMATTED}" ${ROOM} ${TOKEN}
 fi
 
 #curl -sk -X POST "https://matrix.agent.interieur.tchap.gouv.fr/_matrix/client/r0/logout?access_token=${TOKEN} 
