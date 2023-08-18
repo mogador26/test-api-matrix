@@ -69,17 +69,24 @@ Le test consiste à envoyer un message de type texte (**_m.text_**). D'autres ty
 
 ``` shell
 
-if [ ! -z "${TOKEN}" ]
-then
-echo "envoi de message"
-curl -sk -H "Content-Type: application/json" -X POST -d "{\"msgtype\":\"m.text\", \"body\":\"${MESSAGE}\"}"  "https://matrix.agent.interieur.tchap.gouv.fr/_matrix/client/r0/rooms/${ROOM}/send/m.room.message?access_token=${TOKEN}"
-fi
+MESSAGE_PLAIN="${MESSAGE}"
+MESSAGE_FORMATTED="&#9888;&#65039;<strong>${MESSAGE}<strong>"
+
+function sendMessage() {
+
+local MESSAGE_PLAIN=$1
+local MESSAGE_FORMATTED=$2
+local ROOM=$3
+local TOKEN=$4
+
+curl -sk -X POST -H "Content-Type: application/json" -d "{\"msgtype\":\"m.text\", \"body\":\"${MESSAGE_PLAIN}\",\"format\":\"org.matrix.custom.html\",\"formatted_body\":\"${MESSAGE_FORMATTED}\"}" "https://matrix.agent.interieur.tchap.gouv.fr/_matrix/client/r0/rooms/${ROOM}/send/m.room.message?access_token=${TOKEN}"
+
+}
 
 #curl -sk -X POST "https://matrix.agent.interieur.tchap.gouv.fr/_matrix/client/r0/logout?access_token=${TOKEN} 
 
 ```
-> :warning: l'usage de l'attribut *formatted_body* avec la variable ${MESSAGE} encapsulée (balises html) n'a pas permis d'avoir une représentation html du message. (test : en cours).
-
+     
 
 ### résultats
 
@@ -91,6 +98,14 @@ fi
 
 - Les messages représentés sous la forme **[canel2 dev] [🔴 Down] Request failed with status code 502** sont émis par la solution [uptime/kuma](https://github.com/louislam/uptime-kuma) qui inclue des possibilités de notification vers différents types de produit (Telegram, signal, Matrix,etc.)
 
+![image](https://github.com/mogador26/test-api-matrix/assets/38534196/2f22487a-8a1a-49cb-b4ea-ad6801496c9a)
+
+- Exemple d'un message avec une alerte en gras et un [emoji warning](https://emojiguide.org/warning)
+  - pour obtenir ce resultat :
+    - utiliser l'attribut *formatted_body*;
+    - utiliser l'attribut *format* avec la valeur `org.matrix.custom.html`;
+    - la variable `MESSAGE_FORMATTED="&#9888;&#65039;<strong>${MESSAGE}<strong>"` contient le message encapsulé en html
+      
 ---
 
 ### perspectives et cas d'usage 
