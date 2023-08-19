@@ -70,7 +70,7 @@ Le test consiste à envoyer un message de type texte (**_m.text_**). D'autres ty
 ``` shell
 
 MESSAGE_PLAIN="${MESSAGE}"
-MESSAGE_FORMATTED="&#9888;&#65039;<strong>${MESSAGE}<strong>"
+MESSAGE_FORMATTED="&#9888;&#65039;<strong>${MESSAGE_PLAIN}<strong>"
 
 function sendMessage() {
 
