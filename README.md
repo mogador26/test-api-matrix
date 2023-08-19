@@ -104,7 +104,7 @@ curl -sk -X POST -H "Content-Type: application/json" -d "{\"msgtype\":\"m.text\"
   - pour obtenir ce resultat :
     - utiliser l'attribut *formatted_body*;
     - utiliser l'attribut *format* avec la valeur `org.matrix.custom.html`;
-    - la variable `MESSAGE_FORMATTED="&#9888;&#65039;<strong>${MESSAGE}<strong>"` contient le message encapsulé en html
+    - la variable `MESSAGE_FORMATTED="&#9888;&#65039;<strong>${MESSAGE_PLAIN}<strong>"` contient le message encapsulé en html
       
 ---
 
