@@ -87,7 +87,6 @@ curl -sk -X POST -H "Content-Type: application/json" -d "{\"msgtype\":\"m.text\"
 
 ```
      
-
 ### résultats
 
 - Visualisation des tests effectués.
@@ -107,7 +106,22 @@ curl -sk -X POST -H "Content-Type: application/json" -d "{\"msgtype\":\"m.text\"
     - la variable `MESSAGE_FORMATTED="&#9888;&#65039;<strong>${MESSAGE_PLAIN}<strong>"` contient le message encapsulé en html
       
 ---
+### mode d'utilisation
 
+```shell
+./send-message-tchap.sh -m {message} [ -i ] [ -b ] -e {red|green|warn|info}
+ -i : caractères en italique
+ -b : caractères en gras
+ -e : emoji
+```
+
+*Le paramètre `m` est obigatoire*. Vous pouvez intégrer du code html dans la valeur du paramètre m.
+
+```
+./send-message-tchap.sh -m "&#127945; coupe du monde 2023-09-08 20:15 France - NZ <br> aucun probleme de transport" -b -e green
+```
+
+---
 ### perspectives et cas d'usage 
 
 **cas n°1** :
